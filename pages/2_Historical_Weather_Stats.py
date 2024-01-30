@@ -141,8 +141,8 @@ with co1:
     st.write("""
     - category 0 : where temperature is under 0 \n 
     - category 1 : where temperature is between 0 and 10 \n
+    - category 1 : where temperature is between 10 and 20 \n
     - category 3 : where temperature is between 20 and 30 \n
-    - category 4 : where temperature is between 30 and 40\n
     - category 4 : where temperature is between 30 and 40\n
     - category 5 : where temperature is over 40 \n
             """)
@@ -316,14 +316,31 @@ st.write("#")
 df_tmp = df['precipitation'].groupby(df.hour).sum()
 fig = px.bar(df_tmp, y="precipitation" , width=900, height=500,
 labels={
-                     "df['precipitation'].groupby(df.year).sum().index": "Sepal Length (cm)",
-                     "df['precipitation'].groupby(df.year).sum().values": "Sepal Width (cm)",
+                     "df['precipitation'].groupby(df.hour).sum().index": "Sepal Length (cm)",
+                     "df['precipitation'].groupby(df.hour).sum().values": "Sepal Width (cm)",
                      
                  })
 fig.update_layout(
     title=dict(text="Precipitation per hour", font=dict(size=45), automargin=True)
 )
 st.plotly_chart(fig, use_container_width=True)
+
+st.write("---")
+st.write("##### Display the wind speed per hour:\n - Period:", start_date, " to", end_date)
+st.write("#")
+
+df_tmp = df['wind_speed_10m'].groupby(df.hour).mean()
+fig = px.bar(df_tmp, y="wind_speed_10m" , width=900, height=500,
+labels={
+                     "df['wind_speed_10m'].groupby(df.hour).sum().index": "Sepal Length (cm)",
+                     "df['wind_speed_10m'].groupby(df.hour).sum().values": "Sepal Width (cm)",
+                     
+                 })
+fig.update_layout(
+    title=dict(text="Wind speed per hour", font=dict(size=45), automargin=True)
+)
+st.plotly_chart(fig, use_container_width=True)
+
 
 
 col1, col2 = st.columns(2, gap='Large')
@@ -341,8 +358,14 @@ with col1:
     # st.pyplot(fig)
 with col2:
     st.write("### BoxPlot graph based on Temperature in raingn days:")
-    fig, ax = plt.subplots(figsize=(15,8))
+    fig, ax = plt.subplots()
     sb.boxplot(df['temperature_2m'][df['rain']==1])
     st.pyplot(fig)
     st.write("So as described from above chart, the more rainfalls are between 10 to 17 temperatures value.")
-   
+    
+    # st.write("### BoxPlot graph based on Temperature in raingn days:")
+    # fig, ax = plt.subplots()
+    # sb.scatterplot(df['wind_speed_10m'][df['rain']==1].groupby(df.temperature_2m_category).mean())
+    # sb.scatterplot(df['wind_speed_10m'][df['rain']==0].groupby(df.temperature_2m_category).mean())
+    # st.pyplot(fig)
+
