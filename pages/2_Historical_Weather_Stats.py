@@ -325,21 +325,21 @@ fig.update_layout(
 )
 st.plotly_chart(fig, use_container_width=True)
 
-st.write("---")
-st.write("##### Display the wind speed per hour:\n - Period:", start_date, " to", end_date)
-st.write("#")
+# st.write("---")
+# st.write("##### Display the wind speed per hour:\n - Period:", start_date, " to", end_date)
+# st.write("#")
 
-df_tmp = df['wind_speed_10m'].groupby(df.hour).mean()
-fig = px.bar(df_tmp, y="wind_speed_10m" , width=900, height=500,
-labels={
-                     "df['wind_speed_10m'].groupby(df.hour).sum().index": "Sepal Length (cm)",
-                     "df['wind_speed_10m'].groupby(df.hour).sum().values": "Sepal Width (cm)",
+# df_tmp = df['wind_speed_10m'].groupby(df.hour).mean()
+# fig = px.bar(df_tmp, y="wind_speed_10m" , width=900, height=500,
+# labels={
+#                      "df['wind_speed_10m'].groupby(df.hour).sum().index": "Sepal Length (cm)",
+#                      "df['wind_speed_10m'].groupby(df.hour).sum().values": "Sepal Width (cm)",
                      
-                 })
-fig.update_layout(
-    title=dict(text="Wind speed per hour", font=dict(size=45), automargin=True)
-)
-st.plotly_chart(fig, use_container_width=True)
+#                  })
+# fig.update_layout(
+#     title=dict(text="Wind speed per hour", font=dict(size=45), automargin=True)
+# )
+# st.plotly_chart(fig, use_container_width=True)
 
 
 
