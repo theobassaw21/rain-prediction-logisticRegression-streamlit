@@ -83,6 +83,7 @@ def modeling():
 
 def make_prediction(model):
     df_current = pd.read_csv(cwd + "/weather_data/weatherApi_current.csv")
+    df_current = df_current.drop('Unnamed: 0', axis=1)
     df_to_predict = df_current[['temp_c', 'wind_kph', 'humidity', 'cloud']]
     prediction = model.predict(df_to_predict)
     
